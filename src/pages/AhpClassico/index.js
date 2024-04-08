@@ -1,7 +1,6 @@
 import React from 'react';
 import Menu from '../../components/Menu/index';
 import Footer from '../../components/Footer/index';
-import BoxHome from '../../components/BoxHome/index';
 
 
 function AhpClassico() {
