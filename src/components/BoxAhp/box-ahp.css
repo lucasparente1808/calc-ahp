@@ -8,6 +8,21 @@
     align-items: center;
 }
 
+.title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+
+.title-container span {
+    color: #f2f3f5;
+    font-size: 1.75rem;
+    font-weight: bold;
+}
+
 .container-ahp {
     background-color: lightgrey; 
     width: 80%; 

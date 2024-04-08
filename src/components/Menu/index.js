@@ -6,7 +6,7 @@ const Menu = () => {
     return (
         <nav className="menu">
             <ul>
-                <li className="icon-home"><a href="/"><FaHome style={{ fontSize:'30px', color:'#f2f3f5' }} /></a></li>
+                <a href="/"><li className="icon-home"><FaHome style={{ fontSize:'30px', color:'#f2f3f5' }} /></li></a>
                 <li><span>DecisionMaker</span></li>
                 <div className="group-right">
                     <li className='sobre-home'><a href="/sobre">Sobre</a></li>
