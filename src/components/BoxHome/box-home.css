@@ -1,8 +1,8 @@
 .box-home {
     background-color: rgb(195, 189, 189);
     width: 100%;
-    height: calc(100vh - 80px - 98px);
-    border-radius: 10px;
+    height: calc(100vh - 5rem - 6.125rem);
+    border-radius: 0.625rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,14 +12,14 @@
     background-color: lightgrey; 
     width: 80%; 
     height: 80%; 
-    padding: 20px;
-    border-radius: 10px; 
+    padding: 1.25rem;
+    border-radius: 0.625rem; 
 }
 
 .texto-home {
     display: flex;
     justify-content: center;
-    font-size: 18px;
+    font-size: 1.375rem;
     font-weight: bold;
 }
 
@@ -32,17 +32,25 @@
 
 .metodos-ahp a button {
     border-radius: 50%;
-    height: 7rem;
-    width: 10rem;
-    font-size: 18px;
+    height: 10rem;
+    width: 15rem;
+    font-size: 1.375rem;
     font-weight: bold;
     background-color: #126ab8;
     color: #f2f3f5;
     border: none;
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-right: 2.5rem;
+    margin-left: 2.5rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+.metodos-ahp a button:disabled {
+    background-color: darkgrey;    
+}
+
+a.disabled {
+    pointer-events: none;
 }
 
 .metodos-ahp button:hover {

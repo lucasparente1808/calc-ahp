@@ -1,0 +1,17 @@
+.box-ahp {
+    background-color: rgb(195, 189, 189);
+    width: 100%;
+    height: calc(100vh - 5rem - 6.125rem);
+    border-radius: 0.625rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-ahp {
+    background-color: lightgrey; 
+    width: 80%; 
+    height: 80%; 
+    padding: 1.25rem;
+    border-radius: 0.625rem; 
+}
