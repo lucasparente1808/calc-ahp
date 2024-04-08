@@ -1,0 +1,50 @@
+.box-home {
+    background-color: rgb(195, 189, 189);
+    width: 100%;
+    height: calc(100vh - 80px - 98px);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-principal {
+    background-color: lightgrey; 
+    width: 80%; 
+    height: 80%; 
+    padding: 20px;
+    border-radius: 10px; 
+}
+
+.texto-home {
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.metodos-ahp {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+}
+
+.metodos-ahp a button {
+    border-radius: 50%;
+    height: 7rem;
+    width: 10rem;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #126ab8;
+    color: #f2f3f5;
+    border: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.metodos-ahp button:hover {
+    background-color: #014886; 
+}

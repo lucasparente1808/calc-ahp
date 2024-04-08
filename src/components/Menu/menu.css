@@ -1,0 +1,42 @@
+.menu {
+    background-color: #6ab4df;
+    padding: 1px;
+    border-radius: 10px;
+}
+
+.menu ul {
+    list-style-type: none;
+    display: flex;
+    padding: 0;
+    align-items: center;
+}
+
+.menu ul li {
+    margin-right: 2.5rem;
+    align-items: center;
+}
+
+.menu ul li span {
+    font-size: 35px;
+    font-weight: bold;
+    color: #f2f3f5;
+}
+
+.menu ul .group-right {
+    display: flex;
+    font-size: 22px;
+    margin-left: auto;
+    font-weight: bold;
+}
+.menu ul li.icon-home {
+    display: inline-block;
+    background-color: #126ab8; /* Cor de fundo azul */
+    padding: 15px 25px; /* Espaçamento interno para formar o quadrado */
+    border-radius: 5px; /* Bordas arredondadas */
+    margin-left: 25px;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: #f2f3f5;
+}
