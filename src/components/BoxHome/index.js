@@ -5,8 +5,13 @@ const BoxHome = () => {
     return (
         <div className='box-home'>
             <div className='box-principal'>
-                <span className='texto-home' >Métodos de Apoio a Decisão</span>
+                <p> A DecisionMaker é uma calculadora do método <strong>Analytic Hierarchy Process (AHP)</strong>, projetada para auxiliar na tomada de decisões complexas.
+                    Essa nova calculadora oferecerá uma plataforma flexível e abrangente para lidar com uma variedade de problemas. Começando com o AHP Clássico 
+                    e expandindo para incluir outros métodos, nosso compromisso é capacitar os tomadores de decisão com ferramentas poderosas e insights valiosos. 
+                    Acreditamos que essa abordagem aprimorada ajudará a enfrentar os desafios da tomada de decisão de maneira mais eficaz e informada.
+                </p>
                 <div className='metodos-ahp'>
+                    <span>Métodos de Apoio a Decisão</span>
                     <a href='/AhpClassico'>
                         <button> AHP Clássico </button>   
                     </a>

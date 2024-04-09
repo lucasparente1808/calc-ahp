@@ -1,29 +1,25 @@
 import React, { useState } from 'react';
 import './box-name.css';
 
-const BoxName = () => {
-    const [nomeAnalise, setNomeAnalise] = useState('');
+const BoxName = ({ onConfirm }) => {
     const [inputTemp, setInputTemp] = useState(''); // estado temporário para o input
 
     const confirmarNome = () => {
-        setNomeAnalise(inputTemp); // atualiza nomeAnalise com o valor de inputTemp quando o botão é clicado
+        onConfirm(inputTemp); // chama a função onConfirm passada como prop quando o botão é clicado
     };
 
     return (
-        <>
-        {nomeAnalise && <h2>{nomeAnalise}</h2>}
-        {nomeAnalise ? (
-            <button>Próximo</button>
-        ) : (
-            <div className='input-text'>
-                <input 
+        <>    
+             <div className='container-input'>
+                <span> De um nome a sua Análise: </span>
+                <input
+                    className='input-text' 
                     type="text" 
                     value={inputTemp} 
                     onChange={(e) => setInputTemp(e.target.value)} // atualiza inputTemp quando o input muda
                 />
-                <button onClick={confirmarNome}>Confirmar Nome</button>
+                <button className='button-confirma' onClick={confirmarNome}>Confirmar Nome</button>
             </div>
-        )}
         </>  
     );
 };

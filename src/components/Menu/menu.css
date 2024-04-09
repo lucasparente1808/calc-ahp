@@ -1,5 +1,5 @@
 .menu {
-    background-color: #6ab4df;
+    background-color: #126ab8;
     padding: 1px;
     border-radius: 10px;
 }
@@ -17,26 +17,51 @@
 }
 
 .menu ul li span {
-    font-size: 35px;
+    font-size: 2.188rem;
     font-weight: bold;
     color: #f2f3f5;
 }
 
 .menu ul .group-right {
     display: flex;
-    font-size: 22px;
+    font-size: 1.375rem;
     margin-left: auto;
     font-weight: bold;
 }
 .menu ul li.icon-home {
     display: inline-block;
-    background-color: #126ab8; /* Cor de fundo azul */
-    padding: 15px 25px; /* Espaçamento interno para formar o quadrado */
-    border-radius: 5px; /* Bordas arredondadas */
-    margin-left: 25px;
+    background-color: #012f57; /* Cor de fundo azul */
+    padding: 0.938rem 1.563rem; /* Espaçamento interno para formar o quadrado */
+    border-radius: 0.313rem; /* Bordas arredondadas */
+    margin-left: 1.563rem;
+}
+
+.menu ul li.icon-home:hover {
+    background-color: #021c34;
 }
 
 .menu ul li a {
     text-decoration: none;
     color: #f2f3f5;
+}
+
+@media (max-width: 624px) {
+    .menu ul li {
+        margin-right: 0.625rem;
+    }
+    .menu ul li span {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #f2f3f5;
+    }
+    .menu ul .group-right {
+        display: flex;
+        font-size: 1rem;
+    }
+    .menu ul li.icon-home {
+        display: inline-block;
+        background-color: #012f57; /* Cor de fundo azul */
+        padding: 0.5rem 1rem; /* Espaçamento interno para formar o quadrado */
+        margin-left: 1rem;
+    }
 }

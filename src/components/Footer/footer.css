@@ -1,14 +1,19 @@
 .footer {
-    background-color: #6ab4df;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
+    background-color: #126ab8;
+    padding: 0.625rem;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 0.625rem;
+    box-sizing: border-box;
 }
 
 .footer div {
     text-align: center;
-    font-size: 18px;
+    font-size: 1.125rem;
     color: #f2f3f5;
+}
+
+@media (max-width: 624px) {
+    .footer div {
+        font-size: 1rem;
+    }
 }
