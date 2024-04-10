@@ -1,4 +1,4 @@
-.box-alternativas {
+.box-alternativas-criterios {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,9 +9,9 @@
     background-color: #f9f9f9;
 }
 
-.box-alternativas span {
+.box-alternativas-criterios span {
     margin-bottom: 0.625rem;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: bold;
     margin-bottom: 1.25rem;
 }
@@ -60,10 +60,26 @@
     background-color: rgb(189, 23, 23);
 }
 
-.btn-box .proximo {
+.btn-box .voltar {
+    background-color: rgb(191, 185, 27);
+}
+
+.btn-box .voltar:hover {
+    background-color: rgb(136, 132, 2);
+}
+
+.btn-box .proximo-enabled {
     background-color: #126ab8;
 }
 
-.btn-box .proximo:hover {
+.btn-box .proximo-enabled:hover {
     background-color: #044a87;
+}
+
+.btn-box .proximo-disabled {
+    background-color: #494949;
+}
+
+.btn-box .proximo-disabled:hover {
+    background-color: #494949;
 }
