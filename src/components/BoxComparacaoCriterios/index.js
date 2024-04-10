@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './comparacao-criterios.css';
 import { multiply, sum } from 'mathjs';
 
 const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, onAhpCalculation }) => {
+
+    const [inversoState, setInversoState] = useState();
 
     const handleComparacaoChange = (index, valor, inverso) => {
         valor = parseFloat(valor);
@@ -10,8 +12,9 @@ const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, on
             alert('O valor deve estar entre 1 e 9.');
             return;
         }
+        setInversoState(inverso)
         const novasComparacoes = [...comparacoes];
-        novasComparacoes[index] = inverso ? 1 / valor : valor;
+        novasComparacoes[index] = inversoState ? 1 / valor : valor;
         onComparacaoChange(novasComparacoes);
     };
 
@@ -70,7 +73,7 @@ const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, on
                         type="number"
                         min="1"
                         max="9"
-                        value={comparacoes[index] || ''}
+                        value={comparacoes[index] < 1 ? 1 / comparacoes[index] : comparacoes[index] || ''}
                         onChange={(e) => handleComparacaoChange(index, e.target.value, e.target.value === par[1])}
                     />
                 </div>
