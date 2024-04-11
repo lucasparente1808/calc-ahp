@@ -1,36 +1,76 @@
+.principal{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo-comparacao-criterios {
+    display: flex;
+    font-size: 2rem;
+    font-weight: bold;
+    justify-content: center;
+}
+
 .container-comparacao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 0.3125rem;
+    background-color: #f0f0f0;
+}
+
+.prioridade-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin: 10px;
-    padding: 20px;
-    border-radius: 5px;
-    background-color: #f0f0f0;
+    margin-left: 1rem;
+}
+
+.peso-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .container-comparacao .pares {
     font-weight: bold;
-    margin-bottom: 10px;
+    font-size: 1.5rem;
+    margin-right: auto;
 }
 
-.container-comparacao .select-valor, .container-comparacao .input-valor {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+.container-comparacao .select-valor {
+    width: 80%;
+    padding: 0.80rem;
+    border-radius: 0.3125rem;
+    border: 0.0625rem solid #ccc;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 1rem;
 }
 
-.container-comparacao .proximo {
-    padding: 10px 20px;
-    border-radius: 5px;
+.container-comparacao .input-valor {
+    width: 30%;
+    padding: 0.80rem;
+    border-radius: 0.3125rem;
+    border: 0.0625rem solid #ccc;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 1rem;
+}
+
+.proximo-comparacao-criterios {
+    padding: 1rem 2rem;
+    border-radius: 0.3125rem;
     border: none;
     background-color: #007BFF;
     color: white;
     cursor: pointer;
+    margin-top: 1rem; 
+    align-self: center; 
 }
 
-.container-comparacao .proximo:hover {
+.proximo-comparacao-criterios:hover {
     background-color: #0056b3;
 }

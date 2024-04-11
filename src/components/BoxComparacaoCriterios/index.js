@@ -28,13 +28,14 @@ const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, on
 
     const vetorParaMatriz = (vetor) => {
         let matriz = [];
-        for(let i = 0; i < vetor.length; i++) {
+        let index = 0;
+        for(let i = 0; i < criterios.length; i++) {
             matriz[i] = [];
-            for(let j = 0; j < vetor.length; j++) {
+            for(let j = 0; j < criterios.length; j++) {
                 if(i === j) {
                     matriz[i][j] = 1; // o elemento na diagonal principal é sempre 1
                 } else if(j > i) {
-                    matriz[i][j] = vetor[i * vetor.length + j - ((i + 1) * (i + 2)) / 2];
+                    matriz[i][j] = vetor[index++];
                 } else {
                     matriz[i][j] = 1 / matriz[j][i];
                 }
@@ -45,6 +46,7 @@ const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, on
 
     const calcularAHP = () => {
         const matriz = vetorParaMatriz(comparacoes);
+        console.log(comparacoes)
         const matrizNormalizada = normalizarMatriz(matriz);
     
         const vetorPrioridades = calcularVetorPrioridades(matrizNormalizada);
@@ -60,14 +62,20 @@ const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, on
     };
 
     return (
-        <div>
+        <div className='principal'>
+            <span className='titulo-comparacao-criterios'>Comparação de critérios</span>
             {paresDeCriterios.map((par, index) => (
-                <div key={index} className='container-comparacao'>
-                    <label className='pares'>{par[0]} vs {par[1]}</label>
+                <div className='container-comparacao'>
+                <label className='pares'>{par[0]} vs {par[1]}</label>
+                <div className="prioridade-container">
+                    <label className="prioridade-label">Prioridade</label>
                     <select className='select-valor' onChange={(e) => handleComparacaoChange(index, e.target.value, e.target.value === par[1])}>
                         <option value={par[0]}>{par[0]}</option>
                         <option value={par[1]}>{par[1]}</option>
                     </select>
+                </div>
+                <div className="peso-container">
+                    <label className="peso-label">Peso</label>
                     <input
                         className='input-valor'
                         type="number"
@@ -77,8 +85,9 @@ const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, on
                         onChange={(e) => handleComparacaoChange(index, e.target.value, e.target.value === par[1])}
                     />
                 </div>
+            </div>
             ))}
-            <button className='proximo' onClick={calcularAHP}>Próximo</button>
+            <button className='proximo-comparacao-criterios' onClick={calcularAHP}>Próximo</button>
         </div>
     );
 };

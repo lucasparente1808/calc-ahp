@@ -3,6 +3,8 @@ import './box-ahp.css';
 import BoxName from '../BoxName/index';
 import BoxAlternativasCriterios from '../BoxAlternativasCriterios';
 import BoxComparacaoCriterios from '../BoxComparacaoCriterios';
+import BoxComparacaoAlternativas from '../BoxComparacaoAlternativas';
+import BoxResultados from '../BoxResultados';
 
 const BoxAhp = () => {
     const [nomeAnalise, setNomeAnalise] = useState('');
@@ -14,6 +16,8 @@ const BoxAhp = () => {
     const [matrizNormalizadaCriterios, setMatrizNormalizadaCriterios] = useState([]);
     const [vetorPrioridadesCriterios, setVetorPrioridadesCriterios] = useState([]);
     const [indiceConsistenciaCriterios, setIndiceConsistenciaCriterios] = useState(0);
+    const [comparacoesAlternativas, setComparacoesAlternativas] = useState([]);
+    const [matrizesAlternativas, setMatrizesAlternativas] = useState({});
 
     useEffect(() => {
         const calculateBoxHeight = () => {
@@ -36,7 +40,15 @@ const BoxAhp = () => {
 
     const handleCriteriosChange = (list) => {
         setCriterios(list);
-        setStep('comparacao-criterios')
+        if (list.length <= 1) {
+            setStep('comparacao-alternativas');
+            setMatrizNormalizadaCriterios([[1]]);
+            setVetorPrioridadesCriterios([1]);
+            setIndiceConsistenciaCriterios(0);
+            setComparacoesCriterios([[1]]);
+        } else {
+            setStep('comparacao-criterios');
+        }
     };
 
     const handleBackClick = () => {
@@ -45,16 +57,12 @@ const BoxAhp = () => {
         }
     };
 
-    // const handleComparacaoChange = (list) => {
-        
-    // };
+    const handleComparacaoCriteriosChange = (list) => {
+        setStep('comparacao-alternativas')
+    };
 
-    const imprimirMatriz = (matriz) => {
-        let str = '';
-        for(let i = 0; i < matriz.length; i++) {
-            str += '[' + matriz[i].join(', ') + ']\n';
-        }
-        return str;
+    const handleComparacaoAlternativasChange = (list) => {
+        setStep('resultado')
     };
 
     const handleAhpCalculation = (matrizNormalizadaCriterios, vetorPrioridadesCriterios, indiceConsistenciaCriterios, comparacoes) => {
@@ -63,6 +71,11 @@ const BoxAhp = () => {
         setIndiceConsistenciaCriterios(indiceConsistenciaCriterios);
         setComparacoesCriterios(comparacoes);
         setStep('comparacao-alternativas'); 
+    };
+
+    const handleAhpCalculationAlternativas = (matrizes) => {
+        setMatrizesAlternativas(matrizes)
+        setStep('resultado');
     };
 
     return (
@@ -86,23 +99,21 @@ const BoxAhp = () => {
             
             {step === 'criterios' && <BoxAlternativasCriterios type="Critérios" onListChange={handleCriteriosChange} onBackClick={handleBackClick} list={criterios}/>}
             
-            {step === 'comparacao-criterios' && criterios.length > 1 && <BoxComparacaoCriterios criterios={criterios} 
+            {step === 'comparacao-criterios' && criterios.length > 1 && <BoxComparacaoCriterios onListChange={handleComparacaoCriteriosChange} criterios={criterios} 
             comparacoes={comparacoesCriterios} onComparacaoChange={setComparacoesCriterios} onAhpCalculation={handleAhpCalculation}/>}
 
-            {alternativas.length > 0 && <div>{JSON.stringify(alternativas)}</div>}
-            {criterios.length > 0 && <div>{JSON.stringify(criterios)}</div>}
+            {step === 'comparacao-alternativas' && <BoxComparacaoAlternativas onListChange={handleComparacaoAlternativasChange} criterios={criterios} alternativas={alternativas}
+            comparacoes={comparacoesAlternativas} onComparacaoChange={setComparacoesAlternativas} onAhpCalculation={handleAhpCalculationAlternativas}/>}
 
-            {step === 'comparacao-alternativas' && matrizNormalizadaCriterios && vetorPrioridadesCriterios && indiceConsistenciaCriterios && comparacoesCriterios &&
-                <div>
-                    <h3>Matriz Normalizada</h3>
-                    <pre>{imprimirMatriz(matrizNormalizadaCriterios)}</pre>
-                    <h3>Vetor de Prioridades</h3>
-                    <pre>{imprimirMatriz([vetorPrioridadesCriterios])}</pre> {/* Vetor de prioridades é um vetor unidimensional, então nós o colocamos em um array para imprimi-lo como uma matriz */}
-                    <h3>Índice de Consistência</h3>
-                    <pre>{indiceConsistenciaCriterios}</pre> {/* Índice de consistência é um número, então nós o imprimimos diretamente */}
-                    <h3>Comparações Atualizadas</h3>
-                    <pre>{imprimirMatriz(comparacoesCriterios)}</pre>
-                </div>
+            {step === 'resultado' &&
+               <BoxResultados 
+               matrizNormalizadaCriterios={matrizNormalizadaCriterios}
+               vetorPrioridadesCriterios={vetorPrioridadesCriterios}
+               indiceConsistenciaCriterios={indiceConsistenciaCriterios}
+               comparacoesCriterios={comparacoesCriterios}
+               matrizesAlternativas={matrizesAlternativas}
+           />
+                
             }
         </div>
     );
