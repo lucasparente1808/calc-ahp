@@ -13,7 +13,8 @@
     padding: 1rem;
     align-items: center;
     justify-content: center;
-    width: 100%; 
+    width: 100%;
+    border-bottom: 2px solid darkgrey; 
 }
 
 .title-container .title-name {

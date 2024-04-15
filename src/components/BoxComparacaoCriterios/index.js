@@ -6,15 +6,20 @@ const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, on
 
     const [inversoState, setInversoState] = useState();
 
-    const handleComparacaoChange = (index, valor, inverso) => {
+    const handlePrioridadeComparacaoChange = (inverso) => {
+        setInversoState(inverso)
+    };
+
+    const handleComparacaoChange = (index, valor) => {
         valor = parseFloat(valor);
         if (valor < 1 || valor > 9) {
             alert('O valor deve estar entre 1 e 9.');
             return;
         }
-        setInversoState(inverso)
         const novasComparacoes = [...comparacoes];
+        
         novasComparacoes[index] = inversoState ? 1 / valor : valor;
+
         onComparacaoChange(novasComparacoes);
     };
 
@@ -46,7 +51,7 @@ const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, on
 
     const calcularAHP = () => {
         const matriz = vetorParaMatriz(comparacoes);
-        console.log(comparacoes)
+
         const matrizNormalizada = normalizarMatriz(matriz);
     
         const vetorPrioridades = calcularVetorPrioridades(matrizNormalizada);
@@ -69,7 +74,7 @@ const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, on
                 <label className='pares'>{par[0]} vs {par[1]}</label>
                 <div className="prioridade-container">
                     <label className="prioridade-label">Prioridade</label>
-                    <select className='select-valor' onChange={(e) => handleComparacaoChange(index, e.target.value, e.target.value === par[1])}>
+                    <select className='select-valor' onChange={(e) => handlePrioridadeComparacaoChange(e.target.value === par[1])}>
                         <option value={par[0]}>{par[0]}</option>
                         <option value={par[1]}>{par[1]}</option>
                     </select>
@@ -82,7 +87,7 @@ const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, on
                         min="1"
                         max="9"
                         value={comparacoes[index] < 1 ? 1 / comparacoes[index] : comparacoes[index] || ''}
-                        onChange={(e) => handleComparacaoChange(index, e.target.value, e.target.value === par[1])}
+                        onChange={(e) => handleComparacaoChange(index, e.target.value)}
                     />
                 </div>
             </div>

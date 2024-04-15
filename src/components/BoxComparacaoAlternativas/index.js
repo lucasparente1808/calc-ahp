@@ -6,15 +6,20 @@ const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onCom
 
     const [inversoState, setInversoState] = useState();
 
-    const handleComparacaoChange = (index, valor, inverso) => {
+    const handlePrioridadeComparacaoChange = (inverso) => {
+        setInversoState(inverso)
+    };
+
+    const handleComparacaoChange = (index, valor) => {
         valor = parseFloat(valor);
         if (valor < 1 || valor > 9) {
             alert('O valor deve estar entre 1 e 9.');
             return;
         }
-        setInversoState(inverso)
         const novasComparacoes = [...comparacoes];
+        
         novasComparacoes[index] = inversoState ? 1 / valor : valor;
+        
         onComparacaoChange(novasComparacoes);
     };
 
@@ -53,10 +58,10 @@ const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onCom
         const matrizes = {}
         const comparacoesAlternativas = Array.from({length: criterios.length}, () => []);
 
-        comparacoes.map((item, index) => {
+        comparacoes.forEach((item, index) => {
             const position = index % criterios.length;
             comparacoesAlternativas[position].push(item);
-        });
+          });
         
         for (let i = 0; i < criterios.length; i ++){
             const criterio = criterios[i]
@@ -97,7 +102,7 @@ const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onCom
                 <label className='pares'>{par[0]} vs {par[1]} para o critério {par[2]}</label>
                 <div className="prioridade-container">
                     <label className="prioridade-label">Prioridade</label>
-                    <select className='select-valor' onChange={(e) => handleComparacaoChange(index, e.target.value, e.target.value === par[1])}>
+                    <select className='select-valor' onChange={(e) => handlePrioridadeComparacaoChange(e.target.value === par[1])}>
                         <option value={par[0]}>{par[0]}</option>
                         <option value={par[1]}>{par[1]}</option>
                     </select>
@@ -110,7 +115,7 @@ const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onCom
                         min="1"
                         max="9"
                         value={comparacoes[index] < 1 ? 1 / comparacoes[index] : comparacoes[index] || ''}
-                        onChange={(e) => handleComparacaoChange(index, e.target.value, e.target.value === par[1])}
+                        onChange={(e) => handleComparacaoChange(index, e.target.value)}
                     />
                 </div>
             </div>
@@ -134,8 +139,7 @@ const calcularVetorPrioridades = (matrizNormalizada) => {
 const calcularConsistencia = (matriz, vetorPrioridades) => {
     const n = matriz.length;
     const lambdaMax = sum(multiply(matriz, vetorPrioridades));
-    console.log(lambdaMax)
-    const CI = Math.round((lambdaMax - n) / (n - 1));
+    const CI = (lambdaMax - n) / (n - 1);
 
     // Índices aleatórios para n = 1 até 10
     const indicesAleatorios = [0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49];

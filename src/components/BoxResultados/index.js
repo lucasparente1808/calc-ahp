@@ -1,7 +1,6 @@
 import React from 'react';
-import * as math from 'mathjs';
 
-const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, indiceConsistenciaCriterios, comparacoesCriterios, matrizesAlternativas }) => {
+const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, indiceConsistenciaCriterios, comparacoesCriterios, matrizesAlternativas, alternativas }) => {
     // Você pode acessar os props diretamente aqui e usá-los como quiser.
     // Por exemplo, você pode renderizá-los diretamente ou realizar algum cálculo antes de renderizar.
 
@@ -21,25 +20,33 @@ const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, 
         let pontuacoesGlobais = {};
     
         // Inicializando as pontuações globais para cada alternativa
-        for (let chave in matrizesAlternativas) {
-            pontuacoesGlobais[matrizesAlternativas[chave].criterio] = 0;
+        for (let i = 0; i < matrizesAlternativas["matrizAlternativa0"].vetorPrioridades.length; i++) {
+            pontuacoesGlobais[i] = 0;
         }
+
+        let l = 0;
     
         for (let chave in matrizesAlternativas) {
-            let alternativa = matrizesAlternativas[chave];
-    
+            let criterio = matrizesAlternativas[chave];
             // Calculando o produto do vetor de prioridades da alternativa pelo vetor de prioridades dos critérios
-            let produto = math.dot(alternativa.vetorPrioridades, vetorPrioridadesCriterios);
-    
-            // Somando o produto ao valor atual da pontuação global da alternativa
-            pontuacoesGlobais[alternativa.criterio] += produto;
+            for (let i = 0; i < criterio.vetorPrioridades.length; i++) {
+                let produto = criterio.vetorPrioridades[i] * vetorPrioridadesCriterios[l];
+                // Somando o produto ao valor atual da pontuação global da alternativa
+                pontuacoesGlobais[i] += produto;
+            }
+            l++;
         }
     
         // Ordenar as pontuações globais em ordem decrescente
         let pontuacoesOrdenadas = Object.entries(pontuacoesGlobais).sort((a, b) => b[1] - a[1]);
+
+        for (let i = 0; i < pontuacoesOrdenadas.length ; i++){
+            pontuacoesOrdenadas[i][0] = alternativas[pontuacoesOrdenadas[i][0]]
+        }
     
         return pontuacoesOrdenadas;
     };
+    
 
     let pontuacoesGlobais = calcularPontuacaoGlobal();
 
@@ -58,7 +65,7 @@ const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, 
                         <h3>Vetor de Prioridades:</h3>
                         <pre>{imprimirMatriz(matrizesAlternativas[chave].vetorPrioridades)}</pre>
                         <h3>Índice de Consistência:</h3>
-                        <pre>{imprimirMatriz(matrizesAlternativas[chave].indiceConsistencia)}</pre>
+                        <pre>{matrizesAlternativas[chave].indiceConsistencia}</pre>
                     </div>
                 ))}
             </div>

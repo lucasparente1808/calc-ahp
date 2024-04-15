@@ -112,6 +112,7 @@ const BoxAhp = () => {
                indiceConsistenciaCriterios={indiceConsistenciaCriterios}
                comparacoesCriterios={comparacoesCriterios}
                matrizesAlternativas={matrizesAlternativas}
+               alternativas = {alternativas}
            />
                 
             }
