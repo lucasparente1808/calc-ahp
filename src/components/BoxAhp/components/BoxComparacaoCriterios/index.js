@@ -59,7 +59,7 @@ const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, on
         const indiceConsistencia = calcularConsistencia(matriz, vetorPrioridades);
         
         if (indiceConsistencia > 0.1) {
-            let aux = round(indiceConsistencia) * 100;
+            let aux = round((round(indiceConsistencia, 2) * 100));
             alert(`A consistência é maior que 10% e seu valor é ${aux}%`);
             return;
         }
@@ -113,7 +113,7 @@ const calcularVetorPrioridades = (matrizNormalizada) => {
 const calcularConsistencia = (matriz, vetorPrioridades) => {
     const n = matriz.length;
     const lambdaMax = sum(multiply(matriz, vetorPrioridades));
-    const CI = (lambdaMax - n) / (n - 1);
+    const CI = round((lambdaMax - n) / (n - 1), 2);
 
     // Índices aleatórios para n = 1 até 10
     const indicesAleatorios = [0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49];
