@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './comparacao-alternativas.css';
-import { multiply, sum, round } from 'mathjs';
+import { round } from 'mathjs';
 
 const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onComparacaoChange, onAhpCalculation }) => {
 
@@ -69,7 +69,6 @@ const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onCom
             const matriz = vetorParaMatriz(comparacoesAlternativas[i]);
 
             const matrizNormalizada = normalizarMatriz(matriz);
-            
     
             const vetorPrioridades = calcularVetorPrioridades(matrizNormalizada);
     
@@ -139,13 +138,27 @@ const calcularVetorPrioridades = (matrizNormalizada) => {
 
 const calcularConsistencia = (matriz, vetorPrioridades) => {
     const n = matriz.length;
-    const lambdaMax = sum(multiply(matriz, vetorPrioridades));
-    const CI = round((lambdaMax - n) / (n - 1), 2);
+    const somaColunas = []
+    for (let i = 0; i < matriz.length; i++){
+        let soma = 0
+        for(let k = 0; k < matriz[i].length; k++){
+            soma += matriz[k][i]
+        }
+        somaColunas.push(soma) 
+    }
+    const lambdaMax = somaColunas.reduce((sum, value, i) => {
+        const roundedValue1 = value;
+        const roundedValue2 = vetorPrioridades[i];
+        return sum + roundedValue1 * roundedValue2;
+    }, 0);
+    const CI = (lambdaMax - n) / (n - 1);
 
     // Índices aleatórios para n = 1 até 10
     const indicesAleatorios = [0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49];
     const RI = indicesAleatorios[n - 1];
-    const CR = CI / RI;
-    
+
+
+    const CR = CI / RI
     return CR;
 };
+
