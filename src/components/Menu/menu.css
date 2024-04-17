@@ -1,7 +1,6 @@
 .menu {
     background-color: #126ab8;
     padding: 1px;
-    border-radius: 10px;
 }
 
 .menu ul {
@@ -30,9 +29,9 @@
 }
 .menu ul li.icon-home {
     display: inline-block;
-    background-color: #012f57; /* Cor de fundo azul */
-    padding: 0.938rem 1.563rem; /* Espaçamento interno para formar o quadrado */
-    border-radius: 0.313rem; /* Bordas arredondadas */
+    background-color: #012f57; 
+    padding: 0.938rem 1.563rem; 
+    border-radius: 0.313rem; 
     margin-left: 1.563rem;
 }
 
@@ -60,8 +59,64 @@
     }
     .menu ul li.icon-home {
         display: inline-block;
-        background-color: #012f57; /* Cor de fundo azul */
-        padding: 0.5rem 1rem; /* Espaçamento interno para formar o quadrado */
+        background-color: #012f57; 
+        padding: 0.5rem 1rem; 
         margin-left: 1rem;
     }
+}
+
+.dropdown-menu {
+    position: absolute; 
+    background-color: lightgray; 
+    width: 60%; 
+    margin-top: 12rem;
+    margin-left: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
+    z-index: 1; 
+    border: 1px solid black;
+}
+
+.dropdown-menu a button {
+    color: #f2f3f5;
+    background-color: #126ab8;
+    padding: 12px 16px;
+    border: none; 
+    text-decoration: none; 
+    font-size: 1.25rem;
+    font-weight: bold; 
+    width: 100%;
+    cursor: pointer;
+}
+
+.dropdown-menu a .primeiro-botao {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.dropdown-menu a .ultimo-botao {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+.dropdown-menu a button:hover {
+    background-color: #014886;
+}
+
+.dropdown-menu a button:disabled {
+    background-color: darkgrey;
+    cursor: default; 
+}
+
+.dropdown-menu a:hover {
+    background-color: #f1f1f1; 
+}
+
+.icon-dropdown {
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.icon-dropdown:hover {
+    font-size: 1.25rem; /* Aumenta o tamanho da fonte para 20px quando o mouse passa por cima */
 }

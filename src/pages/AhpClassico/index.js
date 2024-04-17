@@ -9,7 +9,6 @@ function AhpClassico() {
     <div>
       <Menu />
       <BoxAhp />
-      {/* Outros componentes da HomePage vão aqui */}
       <Footer />
     </div>
   );

@@ -113,6 +113,7 @@ const BoxAhp = () => {
                comparacoesCriterios={comparacoesCriterios}
                matrizesAlternativas={matrizesAlternativas}
                alternativas = {alternativas}
+               criterios = {criterios}
            />
                 
             }
