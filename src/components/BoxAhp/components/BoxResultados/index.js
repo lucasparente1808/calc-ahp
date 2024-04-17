@@ -36,15 +36,28 @@ const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, 
                 return fracao.n + '/' + fracao.d;
             }
         }
-    
-        
     };
 
-    const matrizFracao = (matriz, rotulo) => {
+    const matrizFracao = (matriz, rotulo, paritaria) => {
         for(let i = 0; i < matriz.length; i++){
             for(let k = 0; k < matriz[i].length; k++){
-                let aux = arredondarDecimal(matriz[i][k])
-                matriz[i][k] = decimalParaFracao(aux);
+                if (paritaria){
+                    if (i <= k) {
+                        if (!Number.isInteger(matriz[i][k])){
+                            matriz[i][k] = decimalParaFracao(matriz[i][k])
+                        } 
+                    } else {
+                        if (typeof matriz[k][i] === 'string'){
+                            let [numerador, denominador] = matriz[k][i].split('/').map(Number);
+                            matriz[i][k] = 1 / (numerador / denominador);
+                        } else {
+                            matriz[i][k] = `1/${matriz[k][i]}`;
+                        }
+                    }
+                }else {
+                    let aux = arredondarDecimal(matriz[i][k])
+                    matriz[i][k] = decimalParaFracao(aux);
+                }
             }
         }
         return imprimirMatriz(matriz, rotulo); 
@@ -55,7 +68,7 @@ const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, 
             <table>
                 <thead>
                     <tr>
-                        <th></th> {/* Célula vazia no canto superior esquerdo */}
+                        <th></th> 
                         {rotulo.map((r, i) => (
                             <th key={i}>{r}</th> 
                         ))}
@@ -64,7 +77,7 @@ const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, 
                 <tbody className='resultados'>
                     {matriz.map((row, i) => (
                         <tr key={i}>
-                            <td>{rotulo[i]}</td> {/* Rótulos das linhas */}
+                            <td>{rotulo[i]}</td> 
                             {row.map((cell, j) => (
                                 <td key={j}>{cell}</td>
                             ))}
@@ -143,6 +156,7 @@ const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, 
     
     let pontuacoesGlobais = calcularPontuacaoGlobal();
 
+
     const chaves = Object.keys(matrizesAlternativas);
 
     return (
@@ -164,11 +178,11 @@ const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, 
                             <div className='matrizes'>
                                 <div className='individual'>
                                     <h3>Matriz:</h3>
-                                    {matrizFracao(matrizesAlternativas[chave].matriz, alternativas)}
+                                    {matrizFracao(matrizesAlternativas[chave].matriz, alternativas, true)}
                                 </div>
                                 <div className='individual'>
                                     <h3>Matriz Normalizada:</h3>
-                                    {matrizFracao(matrizesAlternativas[chave].matrizNormalizada, alternativas)}
+                                    {matrizFracao(matrizesAlternativas[chave].matrizNormalizada, alternativas, false)}
                                 </div>
                                 <div className='individual'>
                                     <h3>Vetor de Prioridades:</h3>
@@ -177,9 +191,14 @@ const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, 
                                 {matrizesAlternativas[chave].indiceConsistencia ? (
                                     <div className='individual'>
                                         <h3>Razão de Consistência:</h3>
-                                        {arredondarDecimal(matrizesAlternativas[chave].indiceConsistencia) * 100}%
+                                        {(Math.round(arredondarDecimal(matrizesAlternativas[chave].indiceConsistencia) * 100) * 100) / 100}%
                                     </div>
-                                ) : null}
+                                ) : 
+                                    <div className='individual'>
+                                        <h3>Razão de Consistência:</h3>
+                                        0%
+                                    </div>
+                                }
                             </div>
                             <div  className='borda-inferior'></div>
                         </div>
@@ -192,11 +211,11 @@ const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, 
                     <div className='matrizes'>
                         <div className='individual'>
                             <h3>Comparações Critérios:</h3>
-                            {matrizFracao(comparacoesCriterios, criterios)}
+                            {matrizFracao(comparacoesCriterios, criterios, true)}
                         </div>
                         <div className='individual'>
                             <h3>Matriz Normalizada Critérios:</h3>
-                            {matrizFracao(matrizNormalizadaCriterios, criterios)}
+                            {matrizFracao(matrizNormalizadaCriterios, criterios, false)}
                         </div>
                         <div className='individual'>
                             <h3>Vetor de Prioridades Critérios:</h3>
@@ -205,9 +224,14 @@ const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, 
                         {indiceConsistenciaCriterios ? (
                             <div className='individual'>
                                 <h3>Razão de Consistência Critérios:</h3>
-                                {arredondarDecimal(indiceConsistenciaCriterios) * 100}%
+                                {(Math.round(arredondarDecimal(indiceConsistenciaCriterios) * 100) * 100) / 100}%
                             </div>
-                        ) : null}
+                        ) :
+                            <div className='individual'>
+                                <h3>Razão de Consistência:</h3>
+                                0%
+                            </div>
+                        }
                     </div>
                     <div  className='borda-inferior'></div>
                 </div>

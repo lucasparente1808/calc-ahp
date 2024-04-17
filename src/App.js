@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import AhpClassico from './pages/AhpClassico';
+import Sobre from './pages/Sobre';
+import Contato from './pages/Contato';
 import './index.css';
 
 
@@ -12,6 +14,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/AhpClassico" element={<AhpClassico/>} />
+          <Route path="/Sobre" element={<Sobre/>} />
+          <Route path="/Contato" element={<Contato/>} />
           {/* Adicione mais rotas conforme necessário */}
         </Routes>
       </div>

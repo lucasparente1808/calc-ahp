@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './comparacao-criterios.css';
-import { multiply, sum } from 'mathjs';
+import { multiply, sum, round } from 'mathjs';
 
 const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, onAhpCalculation }) => {
 
@@ -59,7 +59,8 @@ const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, on
         const indiceConsistencia = calcularConsistencia(matriz, vetorPrioridades);
         
         if (indiceConsistencia > 0.1) {
-            alert(`A consistência é maior que 0.1 e seu valor é ${indiceConsistencia}`);
+            let aux = round(indiceConsistencia) * 100;
+            alert(`A consistência é maior que 10% e seu valor é ${aux}%`);
             return;
         }
     

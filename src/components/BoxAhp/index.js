@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './box-ahp.css';
 import BoxName from '../BoxName/index';
 import BoxAlternativasCriterios from '../BoxAlternativasCriterios';
-import BoxComparacaoCriterios from '../BoxComparacaoCriterios';
-import BoxComparacaoAlternativas from '../BoxComparacaoAlternativas';
-import BoxResultados from '../BoxResultados';
+import BoxComparacaoCriterios from './components/BoxComparacaoCriterios';
+import BoxComparacaoAlternativas from './components/BoxComparacaoAlternativas';
+import BoxResultados from './components/BoxResultados';
 
 const BoxAhp = () => {
     const [nomeAnalise, setNomeAnalise] = useState('');

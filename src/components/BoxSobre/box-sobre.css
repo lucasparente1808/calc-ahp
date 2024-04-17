@@ -1,0 +1,35 @@
+.titulo-principal {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+    justify-content: center;
+}
+
+.titulo-pessoas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box-principal .texto-sobre {
+    margin-bottom: 0;
+}
+
+.box-principal .container-nomes {
+    list-style-type: none; 
+    counter-reset: item;
+}
+
+.box-principal .nome-individual {
+    position: relative; 
+    margin-bottom: 5px;
+}
+
+.box-principal .nome-individual:before {
+    content: "•";
+    color: #000000; 
+    font-size: 1.2em; 
+    position: absolute; 
+    left: -20px; 
+    top: 0;
+}
