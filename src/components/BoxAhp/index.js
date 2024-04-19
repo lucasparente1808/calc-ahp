@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './box-ahp.css';
 import BoxName from '../BoxName/index';
 import BoxAlternativasCriterios from '../BoxAlternativasCriterios';
@@ -10,7 +10,6 @@ const BoxAhp = () => {
     const [nomeAnalise, setNomeAnalise] = useState('');
     const [alternativas, setAlternativas] = useState([]);
     const [criterios, setCriterios] = useState([]);
-    const [boxHeight, setBoxHeight] = useState('calc(100vh - 5rem - 6.125rem)');
     const [step, setStep] = useState('nome');
     const [comparacoesCriterios, setComparacoesCriterios] = useState([]);
     const [matrizNormalizadaCriterios, setMatrizNormalizadaCriterios] = useState([]);
@@ -18,15 +17,6 @@ const BoxAhp = () => {
     const [indiceConsistenciaCriterios, setIndiceConsistenciaCriterios] = useState(0);
     const [comparacoesAlternativas, setComparacoesAlternativas] = useState([]);
     const [matrizesAlternativas, setMatrizesAlternativas] = useState({});
-
-    useEffect(() => {
-        const calculateBoxHeight = () => {
-            const minHeight = 'calc(100vh - 5rem - 6.125rem)';
-            const dynamicHeight = `calc(${minHeight} + ${Math.max(alternativas.length, criterios.length) * 70}px)`;
-            setBoxHeight(dynamicHeight);
-        };
-        calculateBoxHeight();
-    }, [alternativas, criterios]);
 
     const handleConfirm = (nome) => {
         setNomeAnalise(nome);
@@ -79,7 +69,7 @@ const BoxAhp = () => {
     };
 
     return (
-        <div className='box-ahp' style={{ minHeight: boxHeight }}>
+        <div className='box-ahp'>
             <div className='title-container'>
                 <div className='title-name'>
                     <span>Método AHP Clássico</span>

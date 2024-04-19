@@ -177,7 +177,7 @@ const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, 
                             </div>
                             <div className='matrizes'>
                                 <div className='individual'>
-                                    <h3>Matriz:</h3>
+                                    <h3>Matriz Paritária:</h3>
                                     {matrizFracao(matrizesAlternativas[chave].matriz, alternativas, true)}
                                 </div>
                                 <div className='individual'>
@@ -210,7 +210,7 @@ const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, 
                     </div>
                     <div className='matrizes'>
                         <div className='individual'>
-                            <h3>Comparações Critérios:</h3>
+                            <h3>Matriz Paritária Critérios:</h3>
                             {matrizFracao(comparacoesCriterios, criterios, true)}
                         </div>
                         <div className='individual'>

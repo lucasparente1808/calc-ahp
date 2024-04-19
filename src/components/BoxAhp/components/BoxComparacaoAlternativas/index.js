@@ -77,7 +77,7 @@ const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onCom
         
             if (indiceConsistencia > 0.1) {
                 let aux = round((round(indiceConsistencia, 2) * 100));
-                alert(`A consistência é maior que 10% e seu valor é ${aux}%`);
+                alert(`A consistência é maior que 10% e seu valor é ${aux}%, reveja o critério ${criterio}. `);
                 return;
             }
 

@@ -41,7 +41,7 @@
 }
 
 .container-comparacao .select-valor {
-    width: 80%;
+    width: auto;
     padding: 0.80rem;
     border-radius: 0.3125rem;
     border: 0.0625rem solid #ccc;
@@ -67,7 +67,8 @@
     background-color: #007BFF;
     color: white;
     cursor: pointer;
-    margin-top: 1rem; 
+    margin-top: 1rem;
+    margin-bottom: 1rem; 
     align-self: center; 
 }
 
