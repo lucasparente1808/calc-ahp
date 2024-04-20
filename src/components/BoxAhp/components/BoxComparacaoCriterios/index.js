@@ -5,22 +5,39 @@ import { round } from 'mathjs';
 const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, onAhpCalculation }) => {
 
     const [inversoState, setInversoState] = useState(false);
+    const [parIndex, setParIndex] = useState(null);
+    const [prioridadeSelecionada, setPrioridadeSelecionada] = useState(false);
 
-    const handlePrioridadeComparacaoChange = (inverso) => {
-        setInversoState(inverso)
+    const handlePrioridadeComparacaoChange = (inverso, index) => {
+        if (index !== parIndex) {
+            setInversoState(false);
+            setParIndex(index);
+        }
+        const novasComparacoes = [...comparacoes];
+        novasComparacoes[index] = 0;
+        onComparacaoChange(novasComparacoes);
+        setInversoState(inverso);
+        setPrioridadeSelecionada(true);
     };
-
+    
     const handleComparacaoChange = (index, valor) => {
+        if (!prioridadeSelecionada) {
+            alert('Por favor, escolha a prioridade primeiro.');
+            return;
+        }
         valor = parseFloat(valor);
         if (valor < 1 || valor > 9) {
             alert('O valor deve estar entre 1 e 9.');
             return;
         }
         const novasComparacoes = [...comparacoes];
+    
+        const inverso = inversoState;
         
-        novasComparacoes[index] = inversoState ? 1 / valor : valor;
-
+        novasComparacoes[index] = inverso ? 1 / valor : valor;
+        
         onComparacaoChange(novasComparacoes);
+        setPrioridadeSelecionada(false);
     };
 
     // Cria uma lista de todos os pares possíveis de critérios
@@ -75,7 +92,8 @@ const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, on
                 <label className='pares'>{par[0]} vs {par[1]}</label>
                 <div className="prioridade-container">
                     <label className="prioridade-label">Prioridade</label>
-                    <select className='select-valor' onChange={(e) => handlePrioridadeComparacaoChange(e.target.value === par[1])}>
+                    <select className='select-valor' onChange={(e) => handlePrioridadeComparacaoChange(e.target.value === par[1], index)}>
+                        <option value="">Selecione</option>
                         <option value={par[0]}>{par[0]}</option>
                         <option value={par[1]}>{par[1]}</option>
                     </select>
