@@ -21,7 +21,7 @@ const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, on
     };
     
     const handleComparacaoChange = (index, valor) => {
-        if (!prioridadeSelecionada) {
+        if (!prioridadeSelecionada && index !== parIndex) {
             alert('Por favor, escolha a prioridade primeiro.');
             return;
         }
