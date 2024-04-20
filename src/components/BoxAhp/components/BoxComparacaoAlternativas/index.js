@@ -4,7 +4,7 @@ import { round } from 'mathjs';
 
 const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onComparacaoChange, onAhpCalculation }) => {
 
-    const [inversoState, setInversoState] = useState();
+    const [inversoState, setInversoState] = useState(false);
 
     const handlePrioridadeComparacaoChange = (inverso) => {
         setInversoState(inverso)

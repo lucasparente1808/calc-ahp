@@ -4,7 +4,7 @@ import { round } from 'mathjs';
 
 const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, onAhpCalculation }) => {
 
-    const [inversoState, setInversoState] = useState();
+    const [inversoState, setInversoState] = useState(false);
 
     const handlePrioridadeComparacaoChange = (inverso) => {
         setInversoState(inverso)
@@ -132,6 +132,6 @@ const calcularConsistencia = (matriz, vetorPrioridades) => {
     const RI = indicesAleatorios[n - 1];
 
 
-    const CR = CI / RI
+    const CR = CI / RI;
     return CR;
 };

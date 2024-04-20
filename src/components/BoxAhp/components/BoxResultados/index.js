@@ -95,7 +95,7 @@ const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, 
                     {vetor.map((value, i) => (
                         <tr key={i}>
                             <td>{rotulo[i]}</td>
-                            <td>{arredondarDecimal(value)}</td>
+                            <td>{Number(math.round(value, 3))}</td>
                         </tr>
                     ))}
                 </tbody>
