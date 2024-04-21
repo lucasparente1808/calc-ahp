@@ -6,7 +6,7 @@ const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, on
 
     const [inversoState, setInversoState] = useState(false);
     const [parIndex, setParIndex] = useState(null);
-    const [prioridadeSelecionada, setPrioridadeSelecionada] = useState(false);
+    const [listaPrioridadeSelecionada, setListaPrioridadeSelecionada] = useState(new Array(comparacoes.length).fill(false));
 
     const handlePrioridadeComparacaoChange = (inverso, index) => {
         if (index !== parIndex) {
@@ -17,11 +17,15 @@ const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, on
         novasComparacoes[index] = 0;
         onComparacaoChange(novasComparacoes);
         setInversoState(inverso);
-        setPrioridadeSelecionada(true);
+        setListaPrioridadeSelecionada(prevLista => {
+            const novaLista = [...prevLista];
+            novaLista[index] = true;
+            return novaLista;
+        });
     };
     
     const handleComparacaoChange = (index, valor) => {
-        if (!prioridadeSelecionada && index !== parIndex) {
+        if (!listaPrioridadeSelecionada[index] && index !== parIndex) {
             alert('Por favor, escolha a prioridade primeiro.');
             return;
         }
@@ -37,7 +41,6 @@ const BoxComparacaoCriterios = ({ criterios, comparacoes, onComparacaoChange, on
         novasComparacoes[index] = inverso ? 1 / valor : valor;
         
         onComparacaoChange(novasComparacoes);
-        setPrioridadeSelecionada(false);
     };
 
     // Cria uma lista de todos os pares possíveis de critérios
