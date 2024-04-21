@@ -4,46 +4,6 @@ import { round } from 'mathjs';
 
 const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onComparacaoChange, onAhpCalculation }) => {
 
-    const [inversoState, setInversoState] = useState(false);
-    const [parIndex, setParIndex] = useState(null);
-    const [listaPrioridadeSelecionada, setListaPrioridadeSelecionada] = useState(new Array(comparacoes.length).fill(false));
-
-    const handlePrioridadeComparacaoChange = (inverso, index) => {
-        if (index !== parIndex) {
-            setInversoState(false);
-            setParIndex(index);
-        }
-        const novasComparacoes = [...comparacoes];
-        novasComparacoes[index] = 0;
-        onComparacaoChange(novasComparacoes);
-        setInversoState(inverso);
-        setListaPrioridadeSelecionada(prevLista => {
-            const novaLista = [...prevLista];
-            novaLista[index] = true;
-            return novaLista;
-        });
-    };
-    
-    const handleComparacaoChange = (index, valor) => {
-        if (!listaPrioridadeSelecionada[index] && index !== parIndex) {
-            alert('Por favor, escolha a prioridade primeiro.');
-            return;
-        }
-        valor = parseFloat(valor);
-        if (valor < 1 || valor > 9) {
-            alert('O valor deve estar entre 1 e 9.');
-            return;
-        }
-        const novasComparacoes = [...comparacoes];
-    
-        const inverso = inversoState;
-        
-        novasComparacoes[index] = inverso ? 1 / valor : valor;
-        
-        onComparacaoChange(novasComparacoes);
-    };
-
-
     const paresDeAlternativas = [];
     for (let i = 0; i < alternativas.length; i++) {
         for (let j = i + 1; j < alternativas.length; j++) {
@@ -52,6 +12,42 @@ const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onCom
             }
         }
     }
+
+    const [inversoState, setInversoState] = useState(new Array(paresDeAlternativas.length).fill(false));
+
+    const handlePrioridadeComparacaoChange = (inverso, index) => {
+        if (inverso === true){
+            setInversoState(prevLista => {
+                const novaLista = [...prevLista];
+                novaLista[index] = true;
+                return novaLista;
+            })
+        } else {
+            setInversoState(prevLista => {
+                const novaLista = [...prevLista];
+                novaLista[index] = false;
+                return novaLista;
+            })
+        }
+        const novasComparacoes = [...comparacoes];
+        novasComparacoes[index] = 0;
+        onComparacaoChange(novasComparacoes);
+    };
+    
+    const handleComparacaoChange = (index, valor) => {
+        valor = parseFloat(valor);
+        if (valor < 1 || valor > 9) {
+            alert('O valor deve estar entre 1 e 9.');
+            return;
+        }
+        const novasComparacoes = [...comparacoes];
+    
+        const inverso = inversoState[index];
+        
+        novasComparacoes[index] = inverso ? 1 / valor : valor;
+        
+        onComparacaoChange(novasComparacoes);
+    };
 
     const vetorParaMatriz = (vetor) => {
     let matriz = [];
@@ -126,7 +122,6 @@ const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onCom
                 <div className="prioridade-container">
                     <label className="prioridade-label">Prioridade</label>
                     <select className='select-valor' onChange={(e) => handlePrioridadeComparacaoChange(e.target.value === par[1], index)}>
-                        <option value="">Selecione</option>
                         <option value={par[0]}>{par[0]}</option>
                         <option value={par[1]}>{par[1]}</option>
                     </select>
