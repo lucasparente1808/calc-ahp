@@ -85,8 +85,6 @@ const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onCom
 
             const matriz = vetorParaMatriz(comparacoesAlternativas[i]);
 
-            console.log(matriz)
-
             const matrizNormalizada = normalizarMatriz(matriz);
     
             const vetorPrioridades = calcularVetorPrioridades(matrizNormalizada);
