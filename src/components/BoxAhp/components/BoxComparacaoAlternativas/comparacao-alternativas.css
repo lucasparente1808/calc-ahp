@@ -27,3 +27,11 @@
 .proximo-comparacao-alternativas:hover {
     background-color: #0056b3;
 }
+
+.proximo-comparacao-alternativas-disabled {
+    background-color: #494949;
+}
+
+.proximo-comparacao-alternativas-disabled:hover {
+    background-color: #494949;
+}

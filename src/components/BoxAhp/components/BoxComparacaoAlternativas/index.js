@@ -50,6 +50,13 @@ const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onCom
         onComparacaoChange(novasComparacoes);
     };
 
+    const isNextDisabled = () => {
+        if (comparacoes.length === paresDeAlternativas.length) {
+            return false;
+        }
+        return true;
+    };
+
     const vetorParaMatriz = (vetor) => {
     let matriz = [];
     let index = 0;
@@ -95,7 +102,7 @@ const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onCom
         
             if (indiceConsistencia > 0.1) {
                 let aux = round((round(indiceConsistencia, 2) * 100));
-                alert(`A consistência é maior que 10% e seu valor é ${aux}%, reveja o critério ${criterio}. `);
+                alert(`A consistência é maior que 10% e seu valor é ${aux}%, reveja as comparações do critério ${criterio}. `);
                 return;
             }
 
@@ -141,7 +148,7 @@ const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onCom
             </div>
             </>
             ))}
-            <button className='proximo-comparacao-alternativas' onClick={calcularAHP}>Próximo</button>
+            <button className={`proximo-comparacao-alternativas ${isNextDisabled() ? 'proximo-comparacao-alternativas-disabled' : 'proximo-comparacao-alternativas-enabled'}`} onClick={calcularAHP} disabled={isNextDisabled()}>Próximo</button>
         </div>
     );
 };
