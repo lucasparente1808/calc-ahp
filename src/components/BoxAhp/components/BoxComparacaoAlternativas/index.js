@@ -79,9 +79,8 @@ const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onCom
         for (let i = 0; i < criterios.length; i++){
             comparacoesAlternativas.push(comparacoes.slice(i * (comparacoes.length / criterios.length), (i + 1) * (comparacoes.length / criterios.length)))
         }
-        
-        console.log(comparacoesAlternativas)
-        
+    
+
         for (let i = 0; i < criterios.length; i ++){
             const criterio = criterios[i]
 
