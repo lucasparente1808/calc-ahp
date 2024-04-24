@@ -5,9 +5,10 @@ import { round } from 'mathjs';
 const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onComparacaoChange, onAhpCalculation }) => {
 
     const paresDeAlternativas = [];
-    for (let i = 0; i < alternativas.length; i++) {
-        for (let j = i + 1; j < alternativas.length; j++) {
-            for (let k = 0; k < criterios.length; k++) {
+    
+    for (let k = 0; k < criterios.length; k++) {
+        for (let i = 0; i < alternativas.length; i++) {
+            for (let j = i + 1; j < alternativas.length; j++){
                 paresDeAlternativas.push([alternativas[i], alternativas[j], criterios[k]]);
             }
         }
@@ -73,12 +74,13 @@ const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onCom
             return;
         }
         const matrizes = {}
-        const comparacoesAlternativas = Array.from({length: criterios.length}, () => []);
+        const comparacoesAlternativas = [];
 
-        comparacoes.forEach((item, index) => {
-            const position = index % criterios.length;
-            comparacoesAlternativas[position].push(item);
-          });
+        for (let i = 0; i < criterios.length; i++){
+            comparacoesAlternativas.push(comparacoes.slice(i * (comparacoes.length / criterios.length), (i + 1) * (comparacoes.length / criterios.length)))
+        }
+        
+        console.log(comparacoesAlternativas)
         
         for (let i = 0; i < criterios.length; i ++){
             const criterio = criterios[i]
@@ -115,6 +117,8 @@ const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onCom
         <div className='principal'>
             <span className='titulo-comparacao-alternativas'>Comparação de alternativas</span>
             {paresDeAlternativas.map((par, index) => (
+                <>
+                {index % (paresDeAlternativas.length / criterios.length) === 0 && <h2 className='titulo-criterio'> Critério {par[2]} </h2>}
                 <div className='container-comparacao'>
                 <label className='pares'>{par[0]} vs {par[1]} para o critério {par[2]}</label>
                 <div className="prioridade-container">
@@ -134,8 +138,9 @@ const BoxComparacaoAlternativas = ({ criterios, alternativas, comparacoes, onCom
                         value={comparacoes[index] < 1 ? 1 / comparacoes[index] : comparacoes[index] || ''}
                         onChange={(e) => handleComparacaoChange(index, e.target.value)}
                     />
-                </div>
+                </div>          
             </div>
+            </>
             ))}
             <button className='proximo-comparacao-alternativas' onClick={calcularAHP}>Próximo</button>
         </div>

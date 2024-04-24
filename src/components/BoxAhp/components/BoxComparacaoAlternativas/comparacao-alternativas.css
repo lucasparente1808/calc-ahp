@@ -5,6 +5,13 @@
     justify-content: center;
 }
 
+.titulo-criterio {
+    display: flex;
+    font-size: 2rem;
+    font-weight: bold;
+    justify-content: center;
+}
+
 .proximo-comparacao-alternativas {
     padding: 1rem 2rem;
     border-radius: 0.3125rem;
