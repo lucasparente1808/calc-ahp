@@ -11,7 +11,7 @@ const BoxName = ({ onConfirm }) => {
     return (
         <>    
              <div className='container-input'>
-                <span> De um nome a sua Análise: </span>
+                <span> Dê um nome à sua análise: </span>
                 <input
                     className='input-text' 
                     type="text" 
