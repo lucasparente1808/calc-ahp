@@ -30,3 +30,8 @@ Com a instalação dos scripts concluida, basta rodar o projeto com:
 
 O projeto irá abrir no seguinte link [http://localhost:3000](http://localhost:3000).
 
+## Desenvolvedores
+
+* [Lucas Parente Gonçalves](https://github.com/lucasparente1808)
+
+
