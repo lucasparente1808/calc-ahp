@@ -37,6 +37,11 @@ const BoxAlternativasCriterios = ({ type, onListChange, onBackClick, list }) => 
         onListChange(inputList);
     };
 
+    const handleApenasCriterios = () => {
+        const list = [];
+        onListChange(list);
+    }
+
     const isNextDisabled = () => {
         if (type === 'Alternativas' && inputList.filter(i => i !== "").length < 2) {
             return true;
@@ -48,34 +53,37 @@ const BoxAlternativasCriterios = ({ type, onListChange, onBackClick, list }) => 
     };
 
     return (
-        <div className={`box-alternativas-criterios`}>
-            <span>{type}</span>
-            {inputList.map((x, i) => {
-                return (
-                    <div className="box">
-                        <input
-                            name="text"
-                            value={x}
-                            onChange={e => handleInputChange(e, i)}
-                            placeholder={type === 'Alternativas' ? `Alternativa ${i + 1}` : `Critério ${i + 1}`}
-                        />
+        <>
+            <div className={`box-alternativas-criterios`}>
+                <span>{type}</span>
+                {inputList.map((x, i) => {
+                    return (
+                        <div className="box">
+                            <input
+                                name="text"
+                                value={x}
+                                onChange={e => handleInputChange(e, i)}
+                                placeholder={type === 'Alternativas' ? `Alternativa ${i + 1}` : `Critério ${i + 1}`}
+                            />
+                        </div>
+                    );
+                })}
+                <div className="btn-box">
+                    <div>
+                        {inputList.length < 9 && <button onClick={handleAddClick}>Adicionar</button>}
+                        {inputList.length > 2 && type !== 'Critérios' && <button
+                            className="mr10"
+                            onClick={() => handleRemoveClick(inputList.length - 1)}>Remover</button>}
+                        {inputList.length > 1 && type === 'Critérios' && <button
+                            className="mr10"
+                            onClick={() => handleRemoveClick(inputList.length - 1)}>Remover</button>}
                     </div>
-                );
-            })}
-             <div className="btn-box">
-                <div>
-                    {inputList.length < 9 && <button onClick={handleAddClick}>Adicionar</button>}
-                    {inputList.length > 2 && type !== 'Critérios' && <button
-                        className="mr10"
-                        onClick={() => handleRemoveClick(inputList.length - 1)}>Remover</button>}
-                    {inputList.length > 1 && type === 'Critérios' && <button
-                        className="mr10"
-                        onClick={() => handleRemoveClick(inputList.length - 1)}>Remover</button>}
+                    {type === 'Critérios' && <button className='voltar' onClick={onBackClick}>Voltar</button>}
+                    <button className={`proximo ${isNextDisabled() ? 'proximo-disabled' : 'proximo-enabled'}`} onClick={handleNextClick} disabled={isNextDisabled()}>Próximo</button>
                 </div>
-                {type === 'Critérios' && <button className='voltar' onClick={onBackClick}>Voltar</button>}
-                <button className={`proximo ${isNextDisabled() ? 'proximo-disabled' : 'proximo-enabled'}`} onClick={handleNextClick} disabled={isNextDisabled()}>Próximo</button>
             </div>
-        </div>
+            {type === 'Alternativas' && inputList.filter(i => i !== "").length < 2 ? <button className='apenas-criterios' onClick={handleApenasCriterios}>Comparar apenas critérios</button> : null}
+        </>
     );
 };
 

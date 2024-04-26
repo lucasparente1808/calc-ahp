@@ -153,8 +153,12 @@ const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, 
         return pontuacoesOrdenadas;
     };
     
+    let pontuacoesGlobais = []
+
+    if (alternativas.length !== 0){
+        pontuacoesGlobais = calcularPontuacaoGlobal();
+    }
     
-    let pontuacoesGlobais = calcularPontuacaoGlobal();
 
 
     const chaves = Object.keys(matrizesAlternativas);
@@ -162,14 +166,19 @@ const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, 
     return (
         <>
             <div ref={targetRef}>
-                <div className='container-pontuacao-global'>
-                    <div className='individual-pontuacao-global'>
-                        <h1>Pontuação Global</h1>
-                        {imprimirPontuacaoGlobal(pontuacoesGlobais)}
+                {alternativas.length !== 0 ? 
+                <>
+                    <div className='container-pontuacao-global'>
+                        <div className='individual-pontuacao-global'>
+                            <h1>Pontuação Global</h1>
+                            {imprimirPontuacaoGlobal(pontuacoesGlobais)}
+                        </div>
                     </div>
-                </div>
-                <div  className='borda-inferior'></div>
-                <div>
+                    <div  className='borda-inferior'></div>
+                </>
+                : null}
+                {alternativas.length !== 0 ? 
+                    <div>
                     {chaves.map(chave => (
                         <div key={chave} className='container-geral'>
                             <div>
@@ -204,6 +213,7 @@ const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, 
                         </div>
                     ))}
                 </div>
+                : null}
                 <div className='container-geral'>
                     <div>
                         <h2>Resultados da comparação dos critérios</h2>

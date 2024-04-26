@@ -25,7 +25,7 @@ const BoxAhp = () => {
 
     const handleAlternativasChange = (list) => {
         setAlternativas(list);
-        setStep('criterios'); 
+        setStep('criterios');
     };
 
     const handleCriteriosChange = (list) => {
@@ -48,19 +48,29 @@ const BoxAhp = () => {
     };
 
     const handleComparacaoCriteriosChange = (list) => {
-        setStep('comparacao-alternativas')
+        if (alternativas.length !== 0){
+            setStep('comparacao-alternativas');
+        } else {
+            setStep('resultado');
+        }
     };
 
     const handleComparacaoAlternativasChange = (list) => {
-        setStep('resultado')
+        setStep('resultado');
     };
 
     const handleAhpCalculation = (matrizNormalizadaCriterios, vetorPrioridadesCriterios, indiceConsistenciaCriterios, comparacoes) => {
-        setMatrizNormalizadaCriterios(matrizNormalizadaCriterios);
-        setVetorPrioridadesCriterios(vetorPrioridadesCriterios);
-        setIndiceConsistenciaCriterios(indiceConsistenciaCriterios);
-        setComparacoesCriterios(comparacoes);
-        setStep('comparacao-alternativas'); 
+            setMatrizNormalizadaCriterios(matrizNormalizadaCriterios);
+            setVetorPrioridadesCriterios(vetorPrioridadesCriterios);
+            setIndiceConsistenciaCriterios(indiceConsistenciaCriterios);
+            setComparacoesCriterios(comparacoes);
+        if (alternativas.length !== 0){
+            setStep('comparacao-alternativas'); 
+        } else {
+            setMatrizesAlternativas({});
+            setStep('resultado');
+        }
+        
     };
 
     const handleAhpCalculationAlternativas = (matrizes) => {
@@ -92,7 +102,7 @@ const BoxAhp = () => {
             {step === 'comparacao-criterios' && criterios.length > 1 && <BoxComparacaoCriterios onListChange={handleComparacaoCriteriosChange} criterios={criterios} 
             comparacoes={comparacoesCriterios} onComparacaoChange={setComparacoesCriterios} onAhpCalculation={handleAhpCalculation}/>}
 
-            {step === 'comparacao-alternativas' && <BoxComparacaoAlternativas onListChange={handleComparacaoAlternativasChange} criterios={criterios} alternativas={alternativas}
+            {step === 'comparacao-alternativas' && alternativas.length !== 0 && <BoxComparacaoAlternativas onListChange={handleComparacaoAlternativasChange} criterios={criterios} alternativas={alternativas}
             comparacoes={comparacoesAlternativas} onComparacaoChange={setComparacoesAlternativas} onAhpCalculation={handleAhpCalculationAlternativas}/>}
 
             {step === 'resultado' &&
@@ -104,8 +114,7 @@ const BoxAhp = () => {
                matrizesAlternativas={matrizesAlternativas}
                alternativas = {alternativas}
                criterios = {criterios}
-           />
-                
+           />  
             }
         </div>
     );
