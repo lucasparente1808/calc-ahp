@@ -4,9 +4,9 @@ import Fraction from 'fraction.js';
 import './box-resultados.css';
 import { usePDF } from 'react-to-pdf';
 
-const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, indiceConsistenciaCriterios, comparacoesCriterios, matrizesAlternativas, alternativas, criterios }) => {
+const BoxResultados = ({ matrizNormalizadaCriterios, vetorPrioridadesCriterios, indiceConsistenciaCriterios, comparacoesCriterios, matrizesAlternativas, alternativas, criterios, nome }) => {
 
-    const { toPDF, targetRef } = usePDF({filename: 'resultados.pdf'});
+    const { toPDF, targetRef } = usePDF({ filename: `${nome}.pdf` });
 
     const arredondarDecimal = (numero) => {
         if (Number.isInteger(numero)) {

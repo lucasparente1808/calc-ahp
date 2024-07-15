@@ -114,6 +114,7 @@ const BoxAhp = () => {
                matrizesAlternativas={matrizesAlternativas}
                alternativas = {alternativas}
                criterios = {criterios}
+               nome = {nomeAnalise}
            />  
             }
         </div>
